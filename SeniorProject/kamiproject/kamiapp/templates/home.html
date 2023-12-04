@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}KAMI{% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'img/logo.svg' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+    <section class="hero">
+        <div class="hero-container">
+        <div class="column-left">
+            <h1>Kitchen Assistant and Inventory Management</h1>
+            <p>Generate recipes using ingredients in your inventory. Set preferences and manage your inventory.</p>
+            <button onclick="myFunction()">Get Started</button>
+        </div>
+         <div class="column-right">
+         <img src="{% static 'img/logo.svg' %}" alt="KAMI" class="hero-image">
+          </div>
+     </section>
+     <script src="{% static 'js/script.js' %}"></script>
+</body>

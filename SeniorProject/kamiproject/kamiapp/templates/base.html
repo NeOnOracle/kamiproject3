@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}KAMI{% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'img/logo.svg' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <nav>
+    <div class="logo">
+      <img src="{% static 'img/logo.svg' %}" alt="KAMI" class="logo-image">KAMI
+    </div>
+    <div class="nav-items">
+      <a href="{% url 'chatbox' %}" id="chatboxBtn">Chat with Kami</a>
+      <a href="{% url 'inventory' %}" id="inventoryBtn">Inventory</a>
+      <a href="{% url 'about' %}" id="aboutBtn">About Us</a>
+    </div>
+  </nav>
+     
+<div id="content-placeholder">
+  {% block content %}<body>
+    <section class="hero">
+        <div class="hero-container">
+        <div class="column-left">
+            <h1>Kitchen Assistant and Inventory Management</h1>
+            <p>Generate recipes using ingredients in your inventory. Set preferences and manage your inventory.</p>
+            <button onclick="myFunction()">Get Started</button>
+        </div>
+         <div class="column-right">
+         <img src="{% static 'img/logo.svg' %}" alt="KAMI" class="hero-image">
+          </div>
+     </section>
+     <script src="{% static 'js/script.js' %}"></script>
+</body>{% endblock %}
+</div>
+
+<script>
+  $(document).ready(function() {
+      $('#chatboxBtn').click(function(e) {
+          e.preventDefault();
+          $.ajax({
+              url: '{% url "chatbox" %}',
+              type: 'GET',
+              success: function(response) {
+                  $('#content-placeholder').html('<h1>' + response.content + '</h1>');
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      });
+
+      $('#inventoryBtn').click(function(e) {
+          e.preventDefault();
+          $.ajax({
+              url: '{% url "inventory" %}',
+              type: 'GET',
+              success: function(response) {
+                  $('#content-placeholder').html('<h1>' + response.content + '</h1>');
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      });
+
+      $('#aboutBtn').click(function(e) {
+          e.preventDefault();
+          $.ajax({
+              url: '{% url "about" %}',
+              type: 'GET',
+              success: function(response) {
+                  $('#content-placeholder').html('<h1>' + response.content + '</h1>');
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      });
+  });
+</script>
+</body>
+</html>

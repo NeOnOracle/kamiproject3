@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    document.getElementById('gowildBtn').addEventListener('click', function () {
+        // Make an AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/chat/', true);
+
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                // Update the chatbox with the response
+                document.getElementById('chatbox').innerHTML = JSON.parse(xhr.responseText).response_data;
+            }
+        };
+
+        xhr.send();
+    });
+  });
+</script>
+<body>
+
+  <section class="hero">
+    <div class="hero-container">
+      <div class="column-left">
+        <!-- Dropdown -->
+        <!--
+          <div class="dropdown">
+          <button class="dropbtn">- Select Cuisine -</button>
+          <div class="dropdown-content">
+            <a href="#" onclick="selectOption('Italian')">Italian</a>
+            <a href="#" onclick="selectOption('Mexican')">Mexican</a>
+            <a href="#" onclick="selectOption('Chinese')">Chinese</a>
+            <a href="#" onclick="selectOption('Indian')">Indian</a>
+            <a href="#" onclick="selectOption('- Select Cuisine -')">- None -</a>
+          </div>
+        </div>
+      -->
+        <!-- Checkboxes -->
+        <!--
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="tick-box-1"> Go Wild
+            </label>
+            <label>
+                <input type="checkbox" id="tick-box-2"> Ignore Preferences
+            </label>
+        </div>
+      -->
+        <!-- Buttons -->
+        <button id="gowildBtn">Random Recipe</button>
+        <button onclick="myFunction()">Random For Me</button>
+        <button onclick="myFunction()">Add Ingredients</button>
+      </div>
+      <div id="chatbox">
+        <ul id="chat"></ul>
+      </div>
+  </section>
+</body>
+{% endblock %}
